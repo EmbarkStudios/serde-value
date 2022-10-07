@@ -60,7 +60,7 @@ impl Hash for Value {
             Value::F64(v) => OrderedFloat(v).hash(hasher),
             Value::Char(v) => v.hash(hasher),
             Value::String(ref v) => v.hash(hasher),
-            Value::Unit => ().hash(hasher),
+            Value::Unit => {},
             Value::Option(ref v) => v.hash(hasher),
             Value::Newtype(ref v) => v.hash(hasher),
             Value::Seq(ref v) => v.hash(hasher),
@@ -119,7 +119,7 @@ impl Ord for Value {
             (&Value::Seq(ref v0), &Value::Seq(ref v1)) => v0.cmp(v1),
             (&Value::Map(ref v0), &Value::Map(ref v1)) => v0.cmp(v1),
             (&Value::Bytes(ref v0), &Value::Bytes(ref v1)) => v0.cmp(v1),
-            (ref v0, ref v1) => v0.discriminant().cmp(&v1.discriminant()),
+            (v0, v1) => v0.discriminant().cmp(&v1.discriminant()),
         }
     }
 }
