@@ -61,7 +61,10 @@ pub fn to_value<T: ser::Serialize>(value: T) -> Result<Value, SerializerError> {
     value.serialize(Serializer)
 }
 
-struct Serializer;
+/// Serializer whose output is a `Value`.
+///
+/// This is the serializer that backs [`serde_value::to_value`][crate::to_value].
+pub struct Serializer;
 
 impl ser::Serializer for Serializer {
     type Ok = Value;
@@ -256,7 +259,7 @@ impl ser::Serializer for Serializer {
     }
 }
 
-struct SerializeSeq(Vec<Value>);
+pub struct SerializeSeq(Vec<Value>);
 
 impl ser::SerializeSeq for SerializeSeq {
     type Ok = Value;
@@ -279,7 +282,7 @@ impl ser::SerializeSeq for SerializeSeq {
     }
 }
 
-struct SerializeTuple(Vec<Value>);
+pub struct SerializeTuple(Vec<Value>);
 
 impl ser::SerializeTuple for SerializeTuple {
     type Ok = Value;
@@ -302,7 +305,7 @@ impl ser::SerializeTuple for SerializeTuple {
     }
 }
 
-struct SerializeTupleStruct(Vec<Value>);
+pub struct SerializeTupleStruct(Vec<Value>);
 
 impl ser::SerializeTupleStruct for SerializeTupleStruct {
     type Ok = Value;
@@ -325,7 +328,7 @@ impl ser::SerializeTupleStruct for SerializeTupleStruct {
     }
 }
 
-struct SerializeTupleVariant(Value, Vec<Value>);
+pub struct SerializeTupleVariant(Value, Vec<Value>);
 
 impl ser::SerializeTupleVariant for SerializeTupleVariant {
     type Ok = Value;
@@ -350,7 +353,7 @@ impl ser::SerializeTupleVariant for SerializeTupleVariant {
     }
 }
 
-struct SerializeMap {
+pub struct SerializeMap {
     map: BTreeMap<Value, Value>,
     key: Option<Value>,
 }
@@ -385,7 +388,7 @@ impl ser::SerializeMap for SerializeMap {
     }
 }
 
-struct SerializeStruct(BTreeMap<Value, Value>);
+pub struct SerializeStruct(BTreeMap<Value, Value>);
 
 impl ser::SerializeStruct for SerializeStruct {
     type Ok = Value;
@@ -410,7 +413,7 @@ impl ser::SerializeStruct for SerializeStruct {
     }
 }
 
-struct SerializeStructVariant(Value, BTreeMap<Value, Value>);
+pub struct SerializeStructVariant(Value, BTreeMap<Value, Value>);
 
 impl ser::SerializeStructVariant for SerializeStructVariant {
     type Ok = Value;
